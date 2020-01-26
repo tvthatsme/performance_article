@@ -2,11 +2,11 @@
 
 # Как сделать производительность видимой с использованием синтетических тестов, GitLab CI и худу GitLab артефактов
 
-Мы можем оптимизировать приложение так, что его запуск будет казаться мгновенным и 60fps во время его работы — абсолютными минимумом. Однако пройдет месяц, пол года, десять фич, лунное затмение, семь сендвичей с тунцом и от выстраданного быстродействия не останется и следа. Код склонен к деградации. Примите этот факт как весьма огорчительную данность. **Проблема**, которую рассматривает статья — деградация производительности в проекте. 
+Мы можем оптимизировать приложение так, что его запуск будет казаться мгновенным и 60fps во время его работы — абсолютными минимумом. Однако пройдет месяц, пол года, десять фич, лунное затмение, семь сендвичей с тунцом и от выстраданного быстродействия не останется и следа. Код склонен к деградации. Примите этот факт как весьма огорчительную данность. 
 
 Что же делать? Смириться и перестать заботиться о производительности? Это не выход. Производительность это конкурентное преимущество, которое приводит и удерживает клиентов. Регулярно повторять процедуру? Это дорого. И сложно. А значит, несмотря на все достоинства производительного приложения с точки зрения бизнеса, вряд ли окупится. 
 
-Первый шаг к решению любой проблемы — сделать её видимой. И именно об этом я и хочу поговорить. **Цель статьи:** показать способы улучшения видимость производительности в проекте.  
+Первый шаг к решению любой проблемы — сделать её видимой. И именно об этом я и хочу поговорить. 
 
 ## Методы формирования бюджета производительности проекта
 
@@ -244,7 +244,7 @@ process.exit(0);
 webpack --profile --json > stats.json
 ```
 
-В случае, когда используется next.js, можно, к примеру, использовать плагин [@zeit/next-bundle-analyzer](https://www.npmjs.com/package/@zeit/next-bundle-analyzer). Впрочем, он доступен и для webpack: [webpack-bundle-analyzer](https://www.npmjs.com/package/webpack-bundle-analyzer).
+В случае, когда используется next.js, можно, к примеру, использовать плагин [@next/bundle-analyzer](https://www.npmjs.com/package/@zeit/next-bundle-analyzer). Впрочем, он доступен и для webpack: [webpack-bundle-analyzer](https://www.npmjs.com/package/@next/bundle-analyzer).
 
 ### Используем lighthouse
 
@@ -298,7 +298,7 @@ const buildReport = browser => async url => {
 
 1. Адрес, который анализируем.
 2. Настройки `lighthouse`, в частности `port`, на котором поднят браузер и `output` — формат, в котором будет сгенерирован отчет.
-3. Настройки отчета. `lighthouse:full` — всё, что только можно. Для более тонкой настройки следует обратиться к [[документации](https://github.com/GoogleChrome/lighthouse/blob/master/docs/configuration.md).
+3. Настройки отчета. `lighthouse:full` — всё, что только можно. Для более тонкой настройки следует обратиться к [документации](https://github.com/GoogleChrome/lighthouse/blob/master/docs/configuration.md).
 
 Чудесно, у нас есть отчет. Но что с ним сделать? Можно проанализировать какие то из метрик и завершить работу скрипта с ненулевым кодом, что завершит остановит пайплайн: 
 
@@ -466,9 +466,9 @@ const urls = [
  */
 function chunkArray(urls, cors){
     const arrayLength = urls.length;
-    const chunk_size = arrayLength/cors;
+    const chunkSize = arrayLength/cors;
     const resultLength = arrayLength < cors ? arrayLength : cors;
-  	const size = (chunk_size < 1) ? 1 : chunk_size;
+  	const size = (chunkSize < 1) ? 1 : chunkSize;
     return [...(new Array(resultLength))].map((item, index)=>urls.slice(index, index+size));
 }
 ```
@@ -508,6 +508,7 @@ const urls = [
     // Родительский процесс
     const chunks = chunkArray(urls, urls.length/numCPUs);
     chunks.map(chunk => {
+      // Создаем дочерний процесс
       const worker = cluster.fork();
     });
   } else {
@@ -550,10 +551,12 @@ const urls = [
     const chunks = chunkArray(urls, urls.length/numCPUs);
     chunks.map(chunk => {
       const worker = cluster.fork();
+      // Отправляем сообщение с url дочернему процессу
       worker.send(chank);
     });
   } else {
     // Дочерний процесс
+    // Получаем сообщение от родительского процесса
     process.on('message', async (urls) => {
       const browser = await puppeteer.launch({
         args: ['--no-sandbox', '--disable-setuid-sandbox', '--headless'],
@@ -561,9 +564,11 @@ const urls = [
       const builder = buildReport(browser);
       const report = [];
       for (let url of urls) {
+        // Генерируем отчет для каждого url
         const metrics = await builder(url);
         report.push(metrics);
       }
+      // Отправляем массив с отчетами в родительский процесс
       cluster.worker.send(report);
       await browser.close();
     });
