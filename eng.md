@@ -732,9 +732,15 @@ We are finally done with a more complex case. Obviously, there are multiple simi
 
 ### Ain't No Rest For The Wicked
 
+<<<<<<< HEAD
 And it would seem that we finally there, but no, not really. If you are using paid GitLab version, then artifacts with report types `metrics` and `performance` are present in the plans starting from `premium` and `silver`, which will cost $19 per month for each user, which is quite pricy. And you can't just buy a specific feature you need, only change the plan. Sorry. So what we can do? In distinction from GitHub with it's [Checks API](https://developer.github.com/v3/checks/) and [Status API](https://developer.github.com/v3/repos/statuses/) GitLab wouldn't allow you to create an actual widget in the merge request yourself. And there is [no hope to get them any time soon](https://twitter.com/xanf_ua/status/1196781018948259840):
 
 ![Screen shot of the tweet, where Ilya Klimov (GitLab employee) saying about the probability of appearance analogs for Github Checks and Status API: „— Extremely unlikely. checks are already available through commit status API, as for statuses - we are striving to be closed ecosystem‟](images/klymov_eng.png)
+=======
+And it would seem that we finally there, but no, not really. If you are using paid GitLab version, then artifacts with report types `metrics` and `performance` are present in the plans starting from `premium` and `silver`, which will cost $19 per month for each user, which is quite pricy. And you can't just buy a specific feature you need, only change the plan. Sorry. So what we can do? In distinction from GitHub with it's [Checks API](https://developer.github.com/v3/checks/) and [Status API](https://developer.github.com/v3/repos/statuses/) GitLab wouldn't allow you to create an actual widget in the merge request yourself. And there is no hope to get them any time soon:
+
+![Screen shot of the tweet, where Ilya Klimov (GitLab employee) saying about the probability of appearance analogs for Github Checks and Status API: „— Extremely unlikely. checks are already available through commit status API, as for statuses - we are striving to be closed ecosystem‟](images/klymov.png)
+>>>>>>> translation
 
 How to check if you actually have support for this features or not: you may check environment variable `GITLAB_FEATURES` in the pipeline. If it will lack `merge_request_performance_metrics` and `metrics_reports` in the list, then this features are not supported:
 
