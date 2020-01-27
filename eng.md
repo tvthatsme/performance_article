@@ -4,22 +4,22 @@
 
 
 
-We may optimize application so good, that it will start immediately and 60 would be the lowest fps value. But in a month, half a year, ten features, lunar eclipse, seven tuna sandwiches nothing will remind about the performance you were fighting for. Just accept this fact as a sad reality.
+We may optimize application so well that it will start immediately and 60 would be the lowest fps value. But in a month, half a year, ten features, lunar eclipse, or seven tuna sandwiches later, nothing will be remembered about the performance you were fighting for. Just accept this fact as a sad reality.
 
-So what we should do? Just come to terms with this and drop carrying about performance? It's not a solution. Performance is a competitive advantage that can bring and retain customers. Optimize application from time to time? It's costly. And complex. And that's means that despite all benefits of the performance from a business perspective it's hardly become profitable.
+So what we should do? Just come to terms with this and quit caring about performance? It's not a solution. Performance is a competitive advantage that can bring and retain customers. Should you optimize your application from time to time? It's costly. And complex. And that's means that despite all benefits of the performance from a business perspective it's hardly profitable.
 
-The first step to the solution of any problem — make the problem visible. And I want to discuss exactly that.
+The first step in comping to the solution of any problem — make the problem visible. And I want to discuss exactly that.
 
 ## How to create a performance budget for a project
 
-The first question, we should ask: what is the performance project? Which metrics to use? Which values of these metrics are acceptable? The metrics selection is outside of the scope of this article and depends highly on the project context, but I recommend you to start from reading [User-centric Performance Metrics](https://developers.google.com/web/fundamentals/performance/user-centric-performance-metrics) by [Philip Walton](https://developers.google.com/web/resources/contributors/philipwalton).
+The first question we should ask: what is the performance project? Which metrics to use? Which values of these metrics are acceptable? The metrics selection is outside of the scope of this article and depends highly on the project context, but I recommend that you start by reading [User-centric Performance Metrics](https://developers.google.com/web/fundamentals/performance/user-centric-performance-metrics) by [Philip Walton](https://developers.google.com/web/resources/contributors/philipwalton).
 
 The easiest way to define desired values for metrics: use your competitors or even yourself. Also, from time to time tooling like https://www.performancebudget.io/ may come in use.
 
 ### Use competitors for your benefit
 
-If you ever happened to run away from an ecstatically overexcited bear, then you already know, that you don't need to be Olympic champion in running to get out of this trouble. You just need to be a little bit faster than the other guy.
-Make competitors list. If these are projects of the same type, then usually they consist of page types similar to each other. For example, in the internet shop, it may be a page with a product list, product details page, shopping cart, checkout, etc.
+If you ever happened to run away from an ecstatically overexcited bear, then you already know, that you don't need to be an  Olympic champion in running to get out of this trouble. You just need to be a little bit faster than the other guy.
+So make a competitors list. If these are projects of the same type, then they usually consist of page types similar to each other. For example, for an internet shop, it may be a page with a product list, product details page, shopping cart, checkout, etc.
 
 1. Measure the values of your selected metrics on each type of page for your competitor's projects.
 2. Measure the same metrics on your project.
@@ -29,13 +29,13 @@ Why 20%? This is a magic number, which, supposedly, should mean that the differe
 
 ### A fight with a shadow
 
-Do you have a unique project? Don't have any competitors? You already better them any of them in all possible senses? It's not an issue. You always can compete with the only worthy opponent — yourself. Measure each performance metric of your project on each type of page and then make them better by the same 20%.
+Do you have a unique project? Don't have any competitors? You already are better than any of them in all possible senses? It's not an issue. You can always compete with the only worthy opponent — yourself. Measure each performance metric of your project on each type of page and then make them better by the same 20%.
 
 ## Synthetic tests
 
-There are two ways of measuring performance: synthetic, in a controlled environment and RUM (real user measurements) when data being collected from real users in production.
+There are two ways of measuring performance: synthetic, in a controlled environment and RUM (real user measurements) where data is being collected from real users in production.
 
-We will use synthetic tests and assume that project use GitLab with its build-in CI for project deployment.
+We will use synthetic tests and assume that our project uses GitLab with its build-in CI for project deployment.
 
 ### Library and its size as a metric
 
